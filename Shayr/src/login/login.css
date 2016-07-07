@@ -1,0 +1,43 @@
+/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+
+
+.root {
+	-fx-background-color: white;
+}
+
+.username-input, .username-input:focused {
+	-fx-background-insets: 0, 0, 0, 0;
+	-fx-border-color: #d3d3d3;
+	-fx-border-radius: 15px;
+	-fx-background-radius: 15px;
+}
+
+.password-input, .password-input:focused {
+	-fx-background-insets: 0, 0, 0, 0;
+	-fx-border-color: #d3d3d3;
+	-fx-border-radius: 15px;
+	-fx-background-radius: 15px;
+}
+
+.sign-in-btn {
+	-fx-border-radius: 15px;
+	-fx-background-radius: 15px;
+	-fx-background-color: #d3d3d3;
+	-fx-text-fill: white;
+}
+
+.new-account-btn {
+	-fx-background-color: transparent;
+}
+
+.github-btn {
+	-fx-background-color: transparent;
+	-fx-background-image: url("../assets/github.png");
+	-fx-background-size: cover;
+}
+
+.gmail-btn {
+	-fx-background-color: transparent;
+	-fx-background-image: url("../assets/gmail.png");
+	-fx-background-size: cover;
+}

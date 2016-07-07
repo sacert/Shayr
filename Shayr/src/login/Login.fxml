@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="380.0" prefWidth="265.0" styleClass="root" stylesheets="@login.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="35.0" layoutY="20.0" text="|Shayr|" textFill="#aeaeae">
+         <font>
+            <Font name="Helvetica Neue Thin" size="69.0" />
+         </font>
+      </Label>
+      <TextField layoutX="31.0" layoutY="130.0" prefHeight="27.0" prefWidth="204.0" promptText="Username" styleClass="username-input" stylesheets="@login.css">
+         <font>
+            <Font name="Helvetica Neue Thin" size="13.0" />
+         </font>
+      </TextField>
+      <Button layoutX="158.0" layoutY="315.0" mnemonicParsing="false" styleClass="new-account-btn" stylesheets="@login.css" text="Sign up">
+         <font>
+            <Font name="Helvetica Neue Light" size="11.0" />
+         </font>
+      </Button>
+      <Button layoutX="67.0" layoutY="228.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="125.0" styleClass="sign-in-btn" stylesheets="@login.css" text="sign in">
+         <font>
+            <Font name="Helvetica Neue Thin" size="14.0" />
+         </font>
+      </Button>
+      <Button layoutX="101.0" layoutY="339.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="27.0" styleClass="gmail-btn" stylesheets="@login.css" />
+      <Button layoutX="138.0" layoutY="339.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="27.0" styleClass="github-btn" stylesheets="@login.css" />
+      <Label layoutX="54.0" layoutY="319.0" text="Don't have an account?">
+         <font>
+            <Font name="Helvetica Neue Thin" size="11.0" />
+         </font>
+      </Label>
+      <PasswordField layoutX="31.0" layoutY="177.0" prefHeight="27.0" prefWidth="204.0" promptText="Password" styleClass="password-input" stylesheets="@login.css" />
+   </children>
+</Pane>
