@@ -31,15 +31,28 @@ public class Main extends Application {
 	public static void main(String[] args) throws ClassNotFoundException, SQLException {
 		//launch(args);
 		
-		Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/Shayr","root","okay123");
+//		Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/Shayr","root","okay123");
+//		
+//		Statement stmt = (Statement) con.createStatement();
+//		ResultSet rs = stmt.executeQuery("SELECT * FROM Shayr.login");
+//		
+//		while(rs.next()) {
+//			System.out.println(rs.getString("id") + " " + rs.getString("username") + " " + rs.getString("password"));
+//		}
+		
+		String pass = null;
+		Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/Shayr?autoReconnect=true&useSSL=false","root","okay123");
 		
 		Statement stmt = (Statement) con.createStatement();
-		ResultSet rs = stmt.executeQuery("SELECT * FROM Shayr.login");
+		ResultSet rs = stmt.executeQuery("SELECT password FROM Shayr.login where username = \"test\";");
 		
-		while(rs.next()) {
-			System.out.println(rs.getString("id") + " " + rs.getString("username") + " " + rs.getString("password"));
+		if(rs.next()) {
+			pass = rs.getString("password");
 		}
 		
+		if(pass.equals("test")) {
+			System.out.println("great");
+		}
 		
 	}
 }
