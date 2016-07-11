@@ -2,12 +2,7 @@ package client;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.net.Socket;
-
-import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Tab;
 
 public class Listener implements Runnable {
 	
@@ -29,8 +24,6 @@ public class Listener implements Runnable {
 
 	// Start the client
 	public void run() {
-
-		Socket socket;
 		try {
 
 			System.out.println("Connection accepted");

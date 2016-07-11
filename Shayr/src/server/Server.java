@@ -16,7 +16,7 @@ import com.mysql.jdbc.Statement;
 
 public class Server {
 	
-	static final int PORT = 9001;
+	static final int PORT = 1337;
 	private static HashSet<PrintWriter> writers = new HashSet<PrintWriter>(); 
 	
 	public static void main(String[] args) throws IOException {
@@ -47,8 +47,12 @@ public class Server {
 				
 				/* Checks before entering the client */
 				firstMessage = in.readLine();
+				System.out.println("Incomming message: " + firstMessage);
+				
 				if(firstMessage.startsWith("LOGIN: ")) {
 					connected = authenticate(firstMessage);
+				} else if (firstMessage.startsWith("SIGNUP: ")) {
+					addUser(firstMessage);
 				}
 				
 				
@@ -97,6 +101,9 @@ public class Server {
 		
 		}
 		
+		/* Helper function for authenticate()				*
+		 * Connects to database to determine is username 	*
+		 * and password are accepted					 	*/
 		private String getPass(String username) throws SQLException {
 			String pass = null;
 			Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/Shayr?autoReconnect=true&useSSL=false","root","okay123");
@@ -109,6 +116,51 @@ public class Server {
 			}
 			
 			return pass;
+		}
+		
+		
+		private Boolean addUser(String msg) throws SQLException {
+			
+			String username = msg.split(" ")[1].split(",")[0];
+			String password = msg.split(",")[1];
+
+			String usernameCount = checkAndAdd(username, password);
+			
+			if(usernameCount.equals("ACCEPTED")) {
+				out.println("ACCEPTED");
+				out.flush();
+				return true;
+			} else {
+				out.println("DENIED");
+				out.flush();
+				return false;
+			}
+		}
+		
+		/* Helper function for authenticate()				*
+		 * Connects to database to determine is username 	*
+		 * and password are accepted					 	*/
+		private String checkAndAdd(String username, String password) throws SQLException {
+			
+			String pass = null;
+			Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/Shayr?autoReconnect=true&useSSL=false","root","okay123");
+			
+			Statement stmt = (Statement) con.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT COUNT(username) FROM Shayr.login where username = \"" + username + "\";");
+			
+			if(rs.next()) {
+				pass = rs.getString("COUNT(username)");
+			}
+			
+			if(pass.equals("0")) {
+				System.out.println("User successfully attempted to create an account with username: " + username);
+				stmt.executeUpdate("INSERT INTO `Shayr`.`login` (`username`, `password`) VALUES (\"" + username + "\", \"" + password + "\");");
+				return "ACCEPTED";
+			} else {
+				System.out.println("User failed at attempted to create an account with username: " + username);
+				return "DENIED";
+			}
+			
 		}
 	}
 

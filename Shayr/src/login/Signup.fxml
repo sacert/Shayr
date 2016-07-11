@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="380.0" prefWidth="265.0" styleClass="root" stylesheets="@login.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="login.LoginController">
+   <children>
+      <Label layoutX="35.0" layoutY="20.0" text="|Shayr|" textFill="#aeaeae">
+         <font>
+            <Font name="Helvetica Neue Thin" size="69.0" />
+         </font>
+      </Label>
+      <TextField fx:id="signupUsername" layoutX="31.0" layoutY="130.0" prefHeight="27.0" prefWidth="204.0" promptText="Pick Username" styleClass="username-input" stylesheets="@login.css">
+         <font>
+            <Font name="Helvetica Neue Thin" size="13.0" />
+         </font>
+      </TextField>
+      <Button layoutX="66.0" layoutY="271.0" mnemonicParsing="false" onAction="#handleSignupButton" prefHeight="28.0" prefWidth="125.0" styleClass="sign-in-btn" stylesheets="@login.css" text="sign in">
+         <font>
+            <Font name="Helvetica Neue Thin" size="14.0" />
+         </font>
+      </Button>
+      <Button layoutX="101.0" layoutY="339.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="27.0" styleClass="gmail-btn" stylesheets="@login.css" />
+      <Button layoutX="138.0" layoutY="339.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="27.0" styleClass="github-btn" stylesheets="@login.css" />
+      <PasswordField fx:id="signupPassword" layoutX="31.0" layoutY="177.0" prefHeight="27.0" prefWidth="204.0" promptText="Password" styleClass="password-input" stylesheets="@login.css">
+         <font>
+            <Font name="Helvetica Neue Thin" size="13.0" />
+         </font></PasswordField>
+      <PasswordField fx:id="signupVerifyPassword" layoutX="31.0" layoutY="224.0" prefHeight="27.0" prefWidth="204.0" promptText="Veryify Password" styleClass="password-input" stylesheets="@login.css">
+         <font>
+            <Font name="Helvetica Neue Thin" size="13.0" />
+         </font>
+      </PasswordField>
+      <Label layoutX="53.0" layoutY="321.0" text="Already have an account?">
+         <font>
+            <Font name="Helvetica Neue Thin" size="11.0" />
+         </font>
+      </Label>
+      <Button fx:id="loginBtn" layoutX="168.0" layoutY="317.0" mnemonicParsing="false" onAction="#handleLoginScene" styleClass="new-account-btn" stylesheets="@login.css" text="Login">
+         <font>
+            <Font name="Helvetica Neue Light" size="11.0" />
+         </font>
+      </Button>
+   </children>
+</Pane>

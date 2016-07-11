@@ -1,5 +1,7 @@
 package application;
 	
+/* For the most part, this is mainly for testing purposes */ 
+
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;

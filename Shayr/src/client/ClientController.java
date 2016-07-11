@@ -10,7 +10,6 @@ import java.util.ResourceBundle;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
@@ -23,8 +22,8 @@ public class ClientController implements Initializable {
 	@FXML private TextField userInput;
 	
 	String screenName = "";
-	String serverIp = "192.168.0.15";
-	final int portNumber = 9001;
+	String serverIp = "127.0.0.1";
+	final int PORTNUMBER = 1337;
 	BufferedReader in;
 	static PrintWriter out;
 	
@@ -35,7 +34,7 @@ public class ClientController implements Initializable {
 		
 		// start the listener here
 		// NOTE* should probably move to when the program begins
-		Listener listener = new Listener(serverIp, portNumber, in, out);
+		Listener listener = new Listener(serverIp, PORTNUMBER, in, out);
 		Thread x = new Thread(listener);
 		x.start();
 
@@ -56,8 +55,7 @@ public class ClientController implements Initializable {
 	public boolean login(String username, String password) throws IOException {
 		
 		// delete the following lines to make a class for it
-		Socket socket;
-		socket = new Socket(serverIp, 9001);
+		Socket socket = new Socket(serverIp, PORTNUMBER);
 		in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 		out = new PrintWriter(socket.getOutputStream(), true);
 		
@@ -68,7 +66,7 @@ public class ClientController implements Initializable {
 		
 		try {
 			getResponse = in.readLine();
-			System.out.println(getResponse);
+			System.out.println("LOGIN RESPONSE: " + getResponse);
 		} catch(IOException e) {
 			System.err.println(e);
 			e.printStackTrace();
@@ -79,5 +77,31 @@ public class ClientController implements Initializable {
 		} else {
 			return false;
 		}
+	}
+	
+	/* attempt to log into the server and get return result */
+	/* Needs to add try/catch to safely fail 				*/
+	/* Need to revamp password to be more secure			*/
+	public String signup(String username, String password) throws IOException {
+		// delete the following lines to make a class for it
+		Socket socket = new Socket(serverIp, PORTNUMBER);
+		in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+		out = new PrintWriter(socket.getOutputStream(), true);
+		
+		out.println("SIGNUP: " + username + "," + password);
+		out.flush();
+		
+		String getResponse = null;
+		
+		try {
+			getResponse = in.readLine();
+			System.out.println("SIGNUP RESPONSE: " + getResponse);
+		} catch(IOException e) {
+			System.err.println(e);
+			e.printStackTrace();
+		}
+		
+		return getResponse;
+		
 	}
 }
