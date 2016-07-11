@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.URL;
+import java.net.UnknownHostException;
 import java.util.ResourceBundle;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -14,6 +15,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import networkSettings.NetworkSettings;
 
 public class ClientController implements Initializable {
 	
@@ -22,10 +24,17 @@ public class ClientController implements Initializable {
 	@FXML private TextField userInput;
 	
 	String screenName = "";
-	String serverIp = "127.0.0.1";
-	final int PORTNUMBER = 1337;
 	BufferedReader in;
 	static PrintWriter out;
+	Socket socket;
+	
+	NetworkSettings ns;
+	
+	public ClientController() throws UnknownHostException, IOException {
+		ns = new NetworkSettings();
+		in = ns.getBufferedReader();
+		out = ns.getPrinterWriter();
+	}
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -34,7 +43,7 @@ public class ClientController implements Initializable {
 		
 		// start the listener here
 		// NOTE* should probably move to when the program begins
-		Listener listener = new Listener(serverIp, PORTNUMBER, in, out);
+		Listener listener = new Listener(ns.getServerIp(), ns.getPortNumber(), in, out);
 		Thread x = new Thread(listener);
 		x.start();
 
@@ -53,11 +62,6 @@ public class ClientController implements Initializable {
 	/* Needs to add try/catch to safely fail 				*/
 	/* Need to revamp password to be more secure			*/
 	public boolean login(String username, String password) throws IOException {
-		
-		// delete the following lines to make a class for it
-		Socket socket = new Socket(serverIp, PORTNUMBER);
-		in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-		out = new PrintWriter(socket.getOutputStream(), true);
 		
 		out.println("LOGIN: " + username + "," + password);
 		out.flush();
@@ -83,10 +87,6 @@ public class ClientController implements Initializable {
 	/* Needs to add try/catch to safely fail 				*/
 	/* Need to revamp password to be more secure			*/
 	public String signup(String username, String password) throws IOException {
-		// delete the following lines to make a class for it
-		Socket socket = new Socket(serverIp, PORTNUMBER);
-		in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-		out = new PrintWriter(socket.getOutputStream(), true);
 		
 		out.println("SIGNUP: " + username + "," + password);
 		out.flush();

@@ -23,9 +23,11 @@ public class LoginController {
 	@FXML private TextField signupPassword;
 	@FXML private TextField signupVerifyPassword;
 	
-	ClientController client = new ClientController();
+	ClientController client;
 	
 	@FXML void handleLoginButton(ActionEvent event) throws IOException {
+		
+		client = new ClientController();
 		Boolean check;
 		// check if login is true or false and then move to corresponding window page
 		check = client.login(username.getText(), password.getText());
@@ -39,6 +41,8 @@ public class LoginController {
 	}
 	
 	@FXML void handleSignupButton(ActionEvent event) throws IOException {
+		
+		client = new ClientController();
 		String response = "";
 		
 		// check if login is true or false and then move to corresponding window page

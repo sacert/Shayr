@@ -1,8 +1,11 @@
+
+
 package client;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.Socket;
 
 public class Listener implements Runnable {
 	
@@ -24,6 +27,9 @@ public class Listener implements Runnable {
 
 	// Start the client
 	public void run() {
+		
+		// delete the following lines to make a class for it
+		Socket socket;
 		try {
 
 			System.out.println("Connection accepted");
@@ -44,3 +50,4 @@ public class Listener implements Runnable {
 	}
 	
 }
+
